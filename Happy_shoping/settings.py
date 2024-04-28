@@ -2,6 +2,9 @@
 
 from pathlib import Path
 from datetime import timedelta
+import environ
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,7 +19,8 @@ SECRET_KEY = 'django-insecure-zr5!2tidpw%4ymz9d*mi-$fv*+q)s=yl#tckc_ou_!3ux2ydsk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ['https://e-shoping-tkrl.onrender.com','https://*.127.0.0.1']
 
 
 # Application definition
@@ -48,6 +52,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Happy_shoping.urls'
+
+CORS_ORIGIN_ALLOW_ALL = True
+CSRF_TRUSTED_ORIGINS = ['https://e-shoping-tkrl.onrender.com']
+
+
 
 TEMPLATES = [
     {
@@ -143,3 +152,13 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
 
 }
+
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = env("EMAIL")
+EMAIL_HOST_PASSWORD = env("EMAIL_PASSWORD")
